@@ -29,7 +29,7 @@
 
 ## Network Model
 
-<img src="C:\Users\Haswell\AppData\Roaming\Typora\typora-user-images\image-20200623215735002.png" alt="image-20200623215735002" style="zoom: 50%;" />
+<img src="Note.assets/image-20200623215735002.png" alt="image-20200623215735002" style="zoom: 50%;" />
 
 - Model the network as a **stack** of layers.
 - Each layer offers services to layers above it.
@@ -37,7 +37,7 @@
 
 ## Services and Protocols
 
-<img src="C:\Users\Haswell\AppData\Roaming\Typora\typora-user-images\image-20200623215753306.png" alt="image-20200623215753306" style="zoom:50%;" />
+<img src="Note.assets/image-20200623215753306.png" alt="image-20200623215753306" style="zoom:50%;" />
 
 - **Service**: set of primitives that a layer provides to a layer **above** it
   - interfaces between layers
@@ -67,7 +67,7 @@
 
 ### TCP/IP Model
 
-![image-20200623220114430](C:\Users\Haswell\AppData\Roaming\Typora\typora-user-images\image-20200623220114430.png)
+![image-20200623220114430](Note.assets/image-20200623220114430.png)
 
 - Transmission Control Protocol/Internet Protocol – was designed to be independent of data link and physical layers
 - The TCP/IP model reflects what happens on the internet
@@ -75,7 +75,7 @@
 
 ### OSI Model
 
-![image-20200623220050056](C:\Users\Haswell\AppData\Roaming\Typora\typora-user-images\image-20200623220050056.png)
+![image-20200623220050056](Note.assets/image-20200623220050056.png)
 
 - OSI standardised pre-implementation, but not widely implemented
 - OSI helps reflect the thought process that should be followed when designing a network or diagnosing a fault
@@ -135,7 +135,7 @@ The choice of service type affects the reliability, quality and cost of the serv
 
 ## The protocol stack
 
-<img src="C:\Users\Haswell\AppData\Roaming\Typora\typora-user-images\image-20200623220136817.png" alt="image-20200623220136817" style="zoom:50%;" />
+<img src="Note.assets/image-20200623220136817.png" alt="image-20200623220136817" style="zoom:50%;" />
 
 ## World Wide Web
 
@@ -1779,7 +1779,158 @@ close(connfd);
   - MultiProtocol Label Switching MPLS
 - These usually act as a single “link” of an IP network  
 
+## Routing
+
+- **Routing algorithm**: decides which output line an incoming packet should be transmitted on
+  - Combination of
+    - an algorithm local to each router
+    - a protocol to gather the network information needed by the algorithm
+  - Properties of a good routing algorithm
+    - **Correctness**: finds a valid route between all pairs of nodes
+    - **Simplicity**
+    - **Robustness**: a router crash should not require a ‘network’ reboot
+    - **Stability**: a stable algorithm reaches equilibrium and stays there
+    - **Fairness**
+    - **Efficiency**
+    - **Flexibility** to implement policies
+- Routing **Trade-off**
+  - Fairness vs. Efficiency
+    - <img src="Note.assets/image-20200626092221770.png" alt="image-20200626092221770" style="zoom:50%;" />
+  - Delay vs. Bandwidth
+    - Minimise the number of hops a packet has to make
+      - Tends to reduce per packet bandwidth and improve delay
+      - Hopefully also reduces the distance travelled – but not guaranteed
+    - Actual algorithms give a cost to each link
+      - More flexible, but still cannot express all routing preferences
+
+|                         | Non-adaptive (static routing)                           | Adaptive                                                     |
+| ----------------------- | ------------------------------------------------------- | ------------------------------------------------------------ |
+| **Adaptivity**          | Does not adapt to the network topology                  | Dynamic routing, adapts to changes in topology and potentially even traffic levels |
+|                         | Calculated ‘offline’ and uploaded to the router at boot | may get information from adjacent routers, or all routers in the network |
+| **Response to Failure** | Does not respond to failure                             | respond to failure                                           |
+| **When to use**         | Reasonable where there is a clear or implicit choice    | -                                                            |
+| **Optimization**        | -                                                       | distance, hops, estimated transit time, etc                  |
+
+### Flooding
+
+- **Guarantees** shortest distance and minimal delay
+- Useful benchmark in terms of speed
+- **Advantage**: Extremely robust
+  - f there is a path it will find it
+- **Disadvantag**e: Highly inefficient
+  - generates many duplicate packets
+- Have to have a way of discarding packets (TTL)
+  - If unknown can be set to diameter of network
+
+### Optimality Principle
+
+- If router `J` is on the optimal path from router `I` to `K`, then the optimal path from `J` to `K` also falls along the same route.
+
+![image-20200626093138846](Note.assets/image-20200626093138846.png)
+
+### Sink Tree
+
+- The optimality principle means that a set of optimal routes from all sources form a tree rooted at the destination
+
+![image-20200626093228471](Note.assets/image-20200626093228471.png)
+
+
+
+### Shortest Path Algorithm
+
+- View as a labelled graph
+  - Label weight based on delay, distance, cost, etc.
+
+-  At each step, each node is labelled with its distance (sum of costs on edges) from the source and the best known path
+
+- [Dijkstra's algorithm]: https://www.youtube.com/watch?v=_lHSawdgXpI
+
+  
+
+### Link State Routing
+
+- Replaced Distance Vector Routing (“Bellman-Ford”) that had problems with **converging quickly enough**
+- Link state routing distributes the topology, Everyone then performs **centralised routing**
+
+- 5 step process each router must follow
+  1. **Discover its neighbours** and learn their network address
+     - To discover neighbours, a router on boot sends out a HELLO packet on each interface.
+     - The router on the other end must reply with its unique ID
+  2. **Set the distance** or cost metric to each of its neighbours
+     - Cost can be set automatically or manually
+       - Common technique is bandwidth 1 Gbps = 1, 100 Mbps = 10
+       - Could use delay as well – calculated using an ECHO packet
+       - **Traffic engineering**: Many networks manually choose preferred routes and then look for link costs to make those routes the shortest.
+  3. **Construct** a packet containing all it has just learned
+     - Link State Packet consists of ID, sequence number, age, and a list of neighbours and their respective costs
+     - Building the packet is easy, deciding **when to build them is difficult**
+       - At intervals?
+       - When a change occurs – link disconnect?
+     - <img src="Note.assets/image-20200626094059288.png" alt="image-20200626094059288" style="zoom:50%;" />
+  4. Send the packet to, and receive packets from, all other routers
+     - **reliable flooding** is used to send packets to all other routers
+       - acknowledgements are used to guarantee every other router receives the packet
+     - **comparing seq #**
+       - **Length**: Sequence numbers are 32 bits to avoid wrap-around
+       - When a router receives a Link State Packet it compares the sequence number to the one it previously received
+       - If the sequence number is not larger it discards it and does not forward on the flood
+     - **age**
+       - age is reduced by 1 each second
+       - when the age hits zero the information is discarded
+       - resolve the problem that if a router crashes and restarts its sequence number from 0
+  5. Compute the shortest path to every other router
+     -  **centralised alrotihm**
+
+### Distance vector Routing
+
+- Distance vector routing uses a **true distributed algorithm**
+  - Nodes announces the distance from themselves to each destination
+  - When they receive a new announcement of others’ distances,
+    - they update their own estimates
+    - and make a new announcement
+  - Bellman Ford algorithm
+
+### Border Gateway Protocol (BGP)
+
+- **Autonomous Systems (AS)**: collections of routers under the same administrative control
+- Each network will have
+  - A protocol for internal routing (usually based on linked state)
+  - A protocol for external routing between ASes
+    - Must be the same for all ASes
+- In contrast to the internal routing, BGP needs to consider **politics** as well
+  - Companies not willing to have their network used by others
+  - ISPs not wanting other ISPs’ traffic on their networks
+  - Not carrying commercial traffic on academic networks
+  - Use one provider over another because they are cheaper
+  - Don’t send traffic through certain companies or countries because we don't trust them
+- Can’t always say one route is “better” than another
+  - Better in some respects, worse in others
+  - Bellman’s optimality principle doesn’t always apply
+- Roles in BGP
+  - **Customer/provider**: pay you for “transit” of traffic I send or receive
+    - **Provider** advertises routes for the entire internet
+    - **Customer** only advertises routes for their network to avoid transiting other traffic
+  - **peering agreements**: we carry each others’ traffic without charge
+
+![image-20200626095513464](Note.assets/image-20200626095513464.png)
+
+- **Attack**: 
+  - A malicious AS can advertise routes for networks at extremely low cost, causing traffic to re-routed through that AS
+    - 2017 Russian AS advertised routes for Google,Apple, Facebook, Microsoft, Twitter, etc.
+    - 2008 Pakistan attempted to block YouTube, but inadvertently blocked it for the entire internet
+  - an effective way to divert traffic for monitoring or disruption
+
 ## Packet forwarding
+
+- Each router has a forwarding table (or routing table).
+  - This maps destination addresses to outgoing interfaces.
+- Upon receiving a packet
+  - inspect the destination IP address in the header
+  - index into the table
+  - determine the outgoing interface
+  - forward the packet out that interface
+
+- The packet travels along the path to the destination.
 
 ### Connectionless
 
@@ -2014,7 +2165,7 @@ close(connfd);
 
 - Splits don’t need to be equal, but bits must be aligned to split the address into “network” and “host” portions
 
-### Routing
+### Subnet Routing
 
 <img src="Note.assets/image-20200625120140330.png" alt="image-20200625120140330" style="zoom:50%;" />
 
