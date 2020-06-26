@@ -1264,7 +1264,7 @@ core functions which allow interface with transport services (in particular TCP)
 - What data the sender is able to send
   - unacknowledged segments and unsent data that will fit into the receive window
 
-#### Receive window
+#### Receive window (Sliding Window)
 
 - **controlled by receiver**: Sliding window is controlled by receiver
 
@@ -1289,6 +1289,16 @@ core functions which allow interface with transport services (in particular TCP)
   - Sender can initiate an update by sending a ZeroWindowProbe
 - Receiver won’t receive anything, so won’t send any ACKs to increase window size
   - Receiver can initiate an update by sending a WindowUpdate
+
+>Tutoiral 6 Question 2
+>
+>**How can a deadlock occur in the TCP Sliding Window protocol?** 
+>
+>- 
+>
+>**What is the countermeasure used in TCP to prevent this scenario happening?**
+>
+>
 
 ### Congestion Control Window CWND
 
@@ -1464,6 +1474,77 @@ core functions which allow interface with transport services (in particular TCP)
 >- The data hasn't been maliciously corrupted along the way. That is provided by **digital signatures**, usually at layer 7, but possibly at layer 6.
 >- The data was sent by the person it claims to have been sent by. That is provided by **authentication**, at layers 7, 5 (e.g., TLS) or 2 (e.g., WiFi).
 >- The data is private cannot be seen by others. That is provided by **encryption**, again at layer 7 or layer 6.
+
+>Tutorial Week 6 Question 3
+>
+>- **How does the TCP Slow Start algorithm detect potential congestion in the network?** 
+>  - TCP segment loss (as indicated by a **timeout event** or a **fast retransmission** event) is taken as an indication of network congestion and TCP decreases its congestion window size accordingly.
+>
+>- **What other methods (possibly with the explicit assistance of the network layer) could be used to infer congestion in the network?**
+>  - Other methods may include using increasing round-trip delay values as indicators of increased network congestion.
+>  - Network-assisted congestion control mechanisms may use Explicit Congestion Notification, where a
+>    router marks/updates a field in a packet flowing from sender to receiver to indicate congestion.
+>    - Upon receipt of a marked packet, the receiver then notifies the sender of the congestion indication.
+
+>Tutorial Week 6 Question 4
+>
+>**Suppose that the network is not congested. How does the congestion window size cwnd get increase in each transmission round in the Slow Start, Congestion Avoidance and Fast Recovery algorithms, respectively?**
+>
+>- **Slow Start algorithm**: cwnd gets doubled for each transmission round.
+>- **Congestion Avoidance**: cwnd gets increased by 1 MSS for each transmission round.
+>- **Fast Recovery algorithm**: cwnd gets increased by 1 MSS for each duplicate ACK.
+>
+>![image-20200626145459240](Note.assets/image-20200626145459240.png)
+
+>Tutorial Week 6 Question 5
+>
+>**When will the congestion control enter into the Congestion Avoidance algorithm from the Slow Start algorithm?**
+>
+>- When cwnd == ssthresh, it enters to the Congestion Avoidance algorithm to slow down the increment rate of cwnd.
+
+>Tutorial Week 6 Question 6
+>
+>**How does the Slow Start algorithm handle segment loss events?**
+>
+>- For timeout event, set `ssthresh` = `cwnd`/2 and `cwnd` = 1, and continue the Slow Start algorithm.
+>- For fast retransmission event, set `ssthresh` = cwnd/2 and cwnd = ssthresh + 3 * `MSS`, and enter to the Fast Recovery algorithm.
+
+>Tutorial Week 6 Question 7
+>
+>**How does the Slow Start algorithm handle segment loss events?**
+>
+>- For timeout event, set ssthresh = cwnd=2 and cwnd = 1, and enter to the Slow Start algorithm.
+>- For fast retransmission event, set `ssthresh` = cwnd/2 and cwnd = ssthresh + 3 * `MSS`, and enter to the Fast Recovery algorithm.
+
+>Tutorial Week 6 Question 8
+>
+>**For the fast retransmission event, why does it set cwnd = ssthresh + 3  MSS rather than cwnd = ssthresh?**
+>
+>- This is because a fast retransmission event is caused by 3 duplicate ACK for a same segment, which means that the receiver must have successfully received at least 3 segments.
+
+>Tutorial Week 6 Question 9
+>
+>**How does the Fast Recovery algorithm perform?**
+>
+>- For timeout event, set ssthresh = cwnd/2 and cwnd = 1, and enter to the Slow Start algorithm.
+>- For each duplicate ACK, increase cwnd by 1 * MSS.
+>- As soon as it receives a new ACK, cwnd = ssthresh and enter to the Congestion Avoidance algorithm.
+
+> Tutorial Week 6 Question 10
+>
+> - **The size of the TCP receive window never changes throughout the duration of the connection.**
+>   - False. 
+>     - The size of the TCP receive window will change when data is
+>       received (size decreases) to the buffer
+>     - and when the application on the receiver reads data from the buffer (size increases).
+> - **Suppose Host A is sending Host B a large file over a TCP connection. The number of unacknowledged bytes that A sends cannot exceed the size of the receive window.**
+>   - True
+>   - The sliding window protocol maintains the invariant that the number of unacknowledged bytes (last byte sent - last byte acknowledged) is less than or equal to the advertised receive window size.
+> - **Suppose Host A is sending a large file to Host B over a TCP connection. If the sequence number for a segment of this connection is m, then the sequence number for the subsequent segment will necessarily be m + 1.**
+>   - False
+>   - The sequence number of the subsequent segment will depend on the number of bytes in the segment sent.
+> - The TCP segment has a field in its header for the receive window size.
+>   - The Window Size field that appears immediately after the TCP flag sections refers to the Receive Window size.
 
 ## Socket Programming
 
@@ -1871,8 +1952,9 @@ close(connfd);
 #### Shortest Path Algorithm
 
 - View as a labelled graph
-  - Label weight based on delay, distance, cost, etc.
-
+  
+- Label weight based on delay, distance, cost, etc.
+  
 -  At each step, each node is labelled with its distance (sum of costs on edges) from the source and the best known path
 
 - [Dijkstra's algorithm]: https://www.youtube.com/watch?v=_lHSawdgXpI
@@ -2354,7 +2436,7 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
 
  - Allows a **one-to-many** communication, ideal for
    	- Streaming live content
-   	- Video conferences
+      	- Video conferences
    	-  Sending updates to a group of machines
 
 - Class D addresses are **reserved** for multicasting
@@ -2396,6 +2478,17 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
 - **Flow control** is between one host and another
   - Aims to avoid overloading the receiver
 - The solution to both is to **slow the sending rate**
+
+>Tutorial 6 Question 1
+>
+>- What is the difference between congestion control and flow control? 
+>  - flow-control service is used to eliminate the possibility of the sender overflowing the receiver’s buffer.
+>    - Flow control is thus a speed-matching service - matching the rate at which the sender is sending against the rate at which the receiving application is reading.
+>    - A TCP sender can also be throttled due to congestion within the IP network; this form of sender control is referred to as congestion control.
+>- What methods (as discussed in the lectures) are used in TCP to provide each
+>  functionality?
+>  - flow-control: Sliding Window protocols
+>  - congestion control: Slow Start, Congestion Avoidance and Fast Recovery algorithms
 
 ### Congestion Control Solutions
 
@@ -2539,7 +2632,7 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
   - “I have no idea what the link layer will be like in 20 years, but I know it will be ethernet”
   - Packet format / services kept, so software doesn’t need to change
 
-#### MAC (layer-2) Address
+## MAC (layer-2) Address
 
 - A layer 2 / MAC address is
   - A globally unique identifier for the interface (hard-coded by the manufacturer)
@@ -2551,3 +2644,4 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
   - Layer 2 WiFi addresses are **true** MAC addresses
 
 - Modern ethernet like IP (except “routers” called “switches”)
+
