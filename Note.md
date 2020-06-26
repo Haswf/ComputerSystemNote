@@ -1115,7 +1115,7 @@ TCP provides
   - Guaranteed **in-order** delivery of data to the receiver
   - segments will arrive in order by the help of sequence number
 
-### TCP Segment 
+### TCP Header and Segment 
 
 - TCP pairs each chunk of client data with a TCP header, thereby forming TCP segments.
 
@@ -1127,7 +1127,7 @@ TCP provides
 
 
 
-![image-20200624105028886](Note.assets/image-20200624105028886.png)
+<img src="Note.assets/image-20200626110932352.png" alt="image-20200626110932352" style="zoom:50%;" />
 
 <img src="Note.assets/image-20200624103101848.png" alt="image-20200624103101848" style="zoom:50%;" />
 
@@ -1781,6 +1781,34 @@ close(connfd);
 
 ## Routing
 
+###  Routing table
+
+- Routing tables are typically based around a triple
+  - Destination IP Address (base)
+  - Subnet Mask
+  - Outgoing Line (physical or virtual)
+- For example: `203.32.8.0` `255.255.255.0` `Eth 0`
+  - If address matches `203.32.8.0`
+  - in the bits specified by `255.255.255.0`
+  - send the packet to `Eth 0`
+- Longest mask always used when choosing a route
+
+### Route Aggregation
+
+- **Problem**: Size of routing table grows too big in Classless InterDomain Routing
+  - Particular problem for routers at the centre of the internet, they have to maintain routes to almost everywhere
+  - **Impacts** on both lookup and table exchange
+- **Solution**: route aggregation
+  - combines multiple prefixes into a larger prefix
+  - Beneficial for routers further away from the network, which don’t need to consider the routing that is required closer to the destination
+- Aggregation is performed automatically
+  - Currently it roughly halves the size of the routing table
+  - Prefixes can overlap, in which case **the longest matching prefix is selected**
+
+![image-20200626100604463](Note.assets/image-20200626100604463.png)
+
+### Routing algorithm
+
 - **Routing algorithm**: decides which output line an incoming packet should be transmitted on
   - Combination of
     - an algorithm local to each router
@@ -1793,15 +1821,19 @@ close(connfd);
     - **Fairness**
     - **Efficiency**
     - **Flexibility** to implement policies
-- Routing **Trade-off**
-  - Fairness vs. Efficiency
-    - <img src="Note.assets/image-20200626092221770.png" alt="image-20200626092221770" style="zoom:50%;" />
-  - Delay vs. Bandwidth
-    - Minimise the number of hops a packet has to make
-      - Tends to reduce per packet bandwidth and improve delay
-      - Hopefully also reduces the distance travelled – but not guaranteed
-    - Actual algorithms give a cost to each link
-      - More flexible, but still cannot express all routing preferences
+
+#### Goal
+
+- **Fairness** vs. **Efficiency**
+
+<img src="Note.assets/image-20200626092221770.png" alt="image-20200626092221770" style="zoom:50%;" />
+
+- **Delay** vs. **Bandwidth**
+  - Minimise the number of hops a packet has to make
+    - Tends to reduce per packet bandwidth and improve delay
+    - Hopefully also reduces the distance travelled – but not guaranteed
+  - Actual algorithms give a cost to each link
+    - More flexible, but still cannot express all routing preferences
 
 |                         | Non-adaptive (static routing)                           | Adaptive                                                     |
 | ----------------------- | ------------------------------------------------------- | ------------------------------------------------------------ |
@@ -1811,7 +1843,7 @@ close(connfd);
 | **When to use**         | Reasonable where there is a clear or implicit choice    | -                                                            |
 | **Optimization**        | -                                                       | distance, hops, estimated transit time, etc                  |
 
-### Flooding
+#### Flooding
 
 - **Guarantees** shortest distance and minimal delay
 - Useful benchmark in terms of speed
@@ -1822,13 +1854,13 @@ close(connfd);
 - Have to have a way of discarding packets (TTL)
   - If unknown can be set to diameter of network
 
-### Optimality Principle
+#### Optimality Principle
 
 - If router `J` is on the optimal path from router `I` to `K`, then the optimal path from `J` to `K` also falls along the same route.
 
 ![image-20200626093138846](Note.assets/image-20200626093138846.png)
 
-### Sink Tree
+#### Sink Tree
 
 - The optimality principle means that a set of optimal routes from all sources form a tree rooted at the destination
 
@@ -1836,7 +1868,7 @@ close(connfd);
 
 
 
-### Shortest Path Algorithm
+#### Shortest Path Algorithm
 
 - View as a labelled graph
   - Label weight based on delay, distance, cost, etc.
@@ -1847,7 +1879,7 @@ close(connfd);
 
   
 
-### Link State Routing
+#### Link State Routing
 
 - Replaced Distance Vector Routing (“Bellman-Ford”) that had problems with **converging quickly enough**
 - Link state routing distributes the topology, Everyone then performs **centralised routing**
@@ -1881,7 +1913,7 @@ close(connfd);
   5. Compute the shortest path to every other router
      -  **centralised alrotihm**
 
-### Distance vector Routing
+#### Distance vector Routing
 
 - Distance vector routing uses a **true distributed algorithm**
   - Nodes announces the distance from themselves to each destination
@@ -2295,18 +2327,18 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
 
 #### Downsides
 
-- Overhead from fragmentation is incurred from the point of fragmentation all the way to the host
+- **Overhead** from fragmentation is incurred from the point of fragmentation all the way to the host
   - 20 byte header for each fragment
 - If a single fragment is lost the entire packet has to be resent
 - Overhead on hosts in performing reassembly higher than expected
 
-## Path MTU discovery
+### Path MTU discovery
 
 - Each packet is sent with the DF bit set – don’t fragment
 - If a router cannot handle the packet size it sends an ICMP (Internet Control Message Protocol) to the sender host telling it to fragment
   its packets to a smaller size
 
-## IPv4 vs. IPv6 Fragmentation
+### IPv4 vs. IPv6 Fragmentation
 
 - IPv4 allows for either **non-transparent** fragmentation, or path **MTU discovery**
   - **Minimum MTU**: IPv4 minimum accept size 576 bytes
@@ -2317,3 +2349,205 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
   - ICMP messages are sometimes dropped by networks, causing Path MTU discovery to fail
   - in such circumstances a connection will work for low volume, fails at high volume
     - if in doubt send at the minimum accept size
+
+## IP Multicasting
+
+ - Allows a **one-to-many** communication, ideal for
+   	- Streaming live content
+   	- Video conferences
+   	-  Sending updates to a group of machines
+
+- Class D addresses are **reserved** for multicasting
+  - Groups are identified by an IP address (can handle 250 million groups)
+- To send a multicast packet it is sent to the multicast IP address
+  - `224.0.0.0/24` reserved on local networks (routers do not send off LAN)
+  - `224.0.0.1` All systems on a LAN, 
+  - `224.0.0.2` All routers on a LAN
+- **Join a group**: To join a group, a process asks its host to join a particular multicast IP address, the host records this
+- **leave a group**: A process can also ask the host to leave the group, once no processes remain that are interested in the group the host is no longer a member
+- About once a minute a multicast router will broadcast a packet asking all hosts which multicast addresses they are members of
+  - using the multicast address `224.0.0.1`
+  - Each host responds with the multicast addresses of the groups it is a member of
+- These messages are governed by the Internet Group Management Protocol
+
+- **Multicast routing algorithms**
+  - Special multicast routing algorithms are used to construct the routing trees to deliver messages from one sender to all receivers
+- **Amplification attacks**: Presents a security risk through amplification attacks
+  - for example, sending ICMP echo messages to a multicast address
+- **Deployment**
+  - **Widely deployed** within organisational networks
+    - Universities – delivering campus wide video content
+  - Generally **not available** to the average consumer on the internet
+    - Adds complexity to network equipment
+    - Not proven to scale to internet size (i.e. millions of users)
+
+## Congestion Control
+
+- **Congestion Collapse**: If too many packets are placed onto a network it will cause delay and ultimately packet loss, leading to congestion collapse
+  - Congestion collapse occurs when the performance plummets
+  - Congestion can become self-fulfilling, if packets are delayed they could be resent, leading to yet more traffic
+
+<img src="Note.assets/image-20200626105312271.png" alt="image-20200626105312271" style="zoom:50%;" />
+
+### Congestion Control vs. Flow Control
+
+- **Congestion control** is a network problem
+  - Aims to avoid overloading the network
+- **Flow control** is between one host and another
+  - Aims to avoid overloading the receiver
+- The solution to both is to **slow the sending rate**
+
+### Congestion Control Solutions
+
+<img src="Note.assets/image-20200626105514915.png" alt="image-20200626105514915" style="zoom:50%;" />
+
+- Network Provisioning
+  - Ultimate solution, add more capacity, slow and expensive
+- Traffic-aware routing
+  - Temporarily solution, eventually all routes become saturated
+- Admission control
+  - Used on virtual circuits to control who can place traffic onto the route
+- Traffic Throttling
+  - **Aim** is congestion avoidance: Avoid ever reaching a point of congestion that could cause congestion collapse
+  - **Problem**
+    - How to determine when the onset of congestion is taking place
+      - Monitor queuing delay at the router – most effective approach
+    - How to determine which sender is causing it
+      - Need to ensure notification does not create further congestion
+  - Reduce sending rate
+  - effective and reasonably fair
+- Load shedding
+  - Effective at solving congestion
+  - bad for utility of the network
+
+### Explicit Congestion Control - ECN
+
+![image-20200626110423209](Note.assets/image-20200626110423209.png)
+
+| Field                   | Usage                                                        |
+| ----------------------- | ------------------------------------------------------------ |
+| Version                 | Protocol version 4                                           |
+| IHL                     | Header length in 32 bit words(min 5, max 15)                 |
+| Differentiated services | 6 bits for service class + **2 bits for congestion control (ECN)** |
+
+- Two least significant bits in DiffServ header field
+  - `00` – not ECN-capable
+  - `10` or 01 – ECN-capable
+  - `11` – congestion experienced
+
+- **Receiver**: When a receiver receives an IP packet marked as experiencing congestion it echoes to the sender a TCP segment with the `ECE` bit set
+
+- **Sender**: 
+  - The sender reduces it transmission rate and 
+  - sets the [CWR (Congestion Window Reduced)](https://github.com/Haswf/ComputerSystemNote/blob/master/Note.md#path-mtu-discovery) bit to acknowledge the `ECE`
+- On receipt of a TCP segment with CWR set, the receiver stops sending the `ECE` bit (unless `CE` flag set in IP packet)
+  - the receiver will keep sending segments with `ECE` bit set unless the sender has acknowledge the `ECE`
+
+- ECN is closely linked to TCP, and runs between **the Internet** and **Transport layer**
+  - Again demonstrating the blurred lines between layers in TCP/IP
+  - UDP could theoretically use ECN
+    - most network implementation do not give access to the `ECN` bits to allow application layer protocols to make use of them
+
+## Internet Control Protocols
+
+### ICMP – Internet Control Message Protocol
+
+| Message Type                      | Description                      |
+| --------------------------------- | -------------------------------- |
+| Destination Unreachable           | Packed could not be delivered    |
+| Time exceeded                     | Time to live field hit 0         |
+| Parameter problem                 | Invalid header field             |
+| Source quench                     | Choke packet                     |
+| Redirect                          | Teach a router about geography   |
+| Echo and echo reply               | Check if a machine is alive      |
+| Timestamp request/reply           | Same as Echo, but with timestamp |
+| Router advertisement/solicitation | Find a nearby router             |
+
+#### Traceroute
+
+- Traceroute sends out packets to the same destination, each with **an incremented TTL**
+- Counters will hit zero at successive routers, causing the router to return a Time exceeded message, revealing the IP address of the router
+- Sender can use this information to determine path and timings of the route a packet will take
+
+### DHCP – Dynamic Host Configuration Protocol
+
+- DHCP is an **application layer protocol**
+
+  > - DHCP is considered an application layer program since it uses **UDP transport layer protocol** to accomplish its work and therefore must reside at a higher layer in the network stack. 
+  >
+  > - DHCP is an application that allows a client to request a dynamically assigned address on the local network segment. 
+  > - If the DHCP server is located on another segment, a helper address must be configured in a router on the local segment. 
+  >   - This allows a request to be broadcast from the client using only the address 255.255.255.255 using a source address of 0.0.0.0 and an offer to be broadcast back to the client in the same way.
+  >
+  >  [Source](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol)
+
+- **Task**: DHCP automatically allocates IP address
+- Few networks manually configure each host
+  - Difficult to administer, error prone
+  - Slow to respond to new devices
+- Security concerns
+  - connecting any device will issue an IP address
+  - can apply restrictions
+
+#### How DHCP works?
+
+![Sequence of DHCP messages across a network](Note.assets/CSF-Images.4.13.png)
+
+	- Network has a DHCP server for issuing IP addresses
+
+1. Host sends out a DHCP DISCOVER packet
+   - Routers can be configured to relay these to the `DHCP` server if not directly connected to the same network
+2. `DHCP` Server receives the request and responds with a `DHCP OFFER` packet containing an available IP address
+   - IP addresses are typically issued **on a lease**
+   - Hosts can request a renewal before the lease expires
+3. Alternatively, IP address can be tied to a layer-2 address
+4. Also sets several other parameters
+   - Default gateway
+   - DNS servers address
+   - time servers
+   - even the **kernel**: When booting from network, DHCP can be used to specify the kernel/operating system.
+
+### ARP – Address Resolution Protocol (not strictly internet layer)
+
+- ARP is layer 2 protocol (**Directly over Ethernet / link layer**).
+  - a broadcast is sent on layer 2 (data link layer) and ARP will normally not traverse to layer 3 (network layer). 
+  - However it can provide extra features to the layer 3 protocol.
+- The truth is that not all protocols fit the OSI model exactly, because after all it's just a model
+  - It fits layer 2, but doesn't fit layer 3 completely.
+
+#### Address Resolution Protocol
+
+- ARP **translates** addresses between the internet layer and the physical network layer
+  - It allows a host or router to translate an IP address of someone on its network into a layer 2 (MAC/physical) address
+
+#### How does ARP work?
+
+1. Broadcasts an Ethernet (or other layer 2) packet asking who owns the target IP address
+2. Broadcast arrives at every host on the network, the owner will respond with its MAC address
+
+![image-20200626113259904](Note.assets/image-20200626113259904.png)
+
+# Link Layer
+
+- **Old ethernet** like WiFi
+  - Shared medium: can’t choose between different output ports
+  - Just broadcast a packet
+  - If someone else transmits at the same time, there is a “collision”
+  - Mechanisms to try to reduce collisions called “medium access control”
+
+- **Modern ethernet**
+  - “I have no idea what the link layer will be like in 20 years, but I know it will be ethernet”
+  - Packet format / services kept, so software doesn’t need to change
+
+#### MAC (layer-2) Address
+
+- A layer 2 / MAC address is
+  - A globally unique identifier for the interface (hard-coded by the manufacturer)
+  - Between 48 and 64 bits long
+  - Addressing used at the Host-to-network/data link layer
+  - Sometimes called physical address
+
+- Layer 2 addresses are often **incorrectly** called MAC (Medium Access Control) addresses
+  - Layer 2 WiFi addresses are **true** MAC addresses
+
+- Modern ethernet like IP (except “routers” called “switches”)
