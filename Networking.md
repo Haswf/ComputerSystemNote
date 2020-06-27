@@ -29,7 +29,7 @@
 
 ## Network Model
 
-<img src="Note.assets/image-20200623215735002.png" alt="image-20200623215735002" style="zoom: 50%;" />
+<img src="Networking.assets/image-20200623215735002.png" alt="image-20200623215735002" style="zoom: 50%;" />
 
 - Model the network as a **stack** of layers.
 - Each layer offers services to layers above it.
@@ -37,7 +37,7 @@
 
 ## Services and Protocols
 
-<img src="Note.assets/image-20200623215753306.png" alt="image-20200623215753306" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623215753306.png" alt="image-20200623215753306" style="zoom:50%;" />
 
 - **Service**: set of primitives that a layer provides to a layer **above** it
   - interfaces between layers
@@ -67,7 +67,7 @@
 
 ### TCP/IP Model
 
-![image-20200623220114430](Note.assets/image-20200623220114430.png)
+![image-20200623220114430](Networking.assets/image-20200623220114430.png)
 
 - Transmission Control Protocol/Internet Protocol – was designed to be independent of data link and physical layers
 - The TCP/IP model reflects what happens on the internet
@@ -75,7 +75,7 @@
 
 ### OSI Model
 
-![image-20200623220050056](Note.assets/image-20200623220050056.png)
+![image-20200623220050056](Networking.assets/image-20200623220050056.png)
 
 - OSI standardised pre-implementation, but not widely implemented
 - OSI helps reflect the thought process that should be followed when designing a network or diagnosing a fault
@@ -135,13 +135,13 @@ The choice of service type affects the reliability, quality and cost of the serv
 
 ## The protocol stack
 
-<img src="Note.assets/image-20200623220136817.png" alt="image-20200623220136817" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623220136817.png" alt="image-20200623220136817" style="zoom:50%;" />
 
 ## World Wide Web
 
 ### Components 
 
-<img src="Note.assets/image-20200623220713752.png" alt="image-20200623220713752" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623220713752.png" alt="image-20200623220713752" style="zoom:50%;" />
 
 - Client - typically a browser based access to pages
 - Server - daemon based content delivery of pages
@@ -149,7 +149,7 @@ The choice of service type affects the reliability, quality and cost of the serv
 
 ### Architecture
 
-<img src="Note.assets/image-20200623220804780.png" alt="image-20200623220804780" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623220804780.png" alt="image-20200623220804780" style="zoom:50%;" />
 
 # Application Layer
 
@@ -176,9 +176,9 @@ Connections
 | OS overhead for each TCP connection                          | subsequent HTTP messages between same client/server sent over open connection |
 | browsers often open parallel TCP connections to fetch referenced objects | client sends requests as soon as it encounters a referenced object,reducing overall response time |
 
-![image-20200623221254485](Note.assets/image-20200623221254485.png)
+![image-20200623221254485](Networking.assets/image-20200623221254485.png)
 
-<img src="Note.assets/image-20200623221341633.png" alt="image-20200623221341633" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623221341633.png" alt="image-20200623221341633" style="zoom:50%;" />
 
 - (a) multiple connections and sequential requests.
 - (b) A persistent connection and sequential requests.
@@ -219,7 +219,7 @@ Connections
 
 ### HTTP Methods
 
-<img src="Note.assets/image-20200623221818361.png" alt="image-20200623221818361" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623221818361.png" alt="image-20200623221818361" style="zoom:50%;" />
 
 - **Idempotent 幂等性** : multiple identical requests have same effect
 
@@ -349,7 +349,7 @@ Content-Encoding: gzip\r\n
 
 ## Client side processing
 
-<img src="Note.assets/image-20200623225505230.png" alt="image-20200623225505230" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623225505230.png" alt="image-20200623225505230" style="zoom:50%;" />
 
 - Plugins/Extensions - integrated software module which executes inside the browser
   - direct access to online context
@@ -367,7 +367,7 @@ Content-Encoding: gzip\r\n
 
 ## Multi-threaded Web Server
 
-<img src="Note.assets/image-20200623225921742.png" alt="image-20200623225921742" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623225921742.png" alt="image-20200623225921742" style="zoom:50%;" />
 
 - A multithreaded Web server with a front end and processing modules.
 - A processing module performs a series of steps:
@@ -381,7 +381,7 @@ Content-Encoding: gzip\r\n
 
 ## Web Cache
 
-<img src="Note.assets/image-20200623230329887.png" alt="image-20200623230329887" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623230329887.png" alt="image-20200623230329887" style="zoom:50%;" />
 
 **Goal**: satisfy client request without involving origin server - reduce response time.
 
@@ -393,11 +393,11 @@ Content-Encoding: gzip\r\n
   - or the proxy requests object from origin server, then returns object to client.
 - Note: the proxy server acts as both client and server.
 
-<img src="Note.assets/image-20200623230401603.png" alt="image-20200623230401603" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623230401603.png" alt="image-20200623230401603" style="zoom:50%;" />
 
 ## Cookies
 
-![image-20200623231046428](Note.assets/image-20200623231046428.png)
+![image-20200623231046428](Networking.assets/image-20200623231046428.png)
 
 - HTTP is a stateless protocol
 
@@ -460,7 +460,7 @@ Content-Encoding: gzip\r\n
 - Syntactically Restricted Tag Sets
 - Attributes & Values <img src="pic1.gif" alt="pic1.gif">
 
-<img src="Note.assets/image-20200623232824349.png" alt="image-20200623232824349" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623232824349.png" alt="image-20200623232824349" style="zoom:50%;" />
 
 ## XML & XSL
 
@@ -476,15 +476,15 @@ XML (Extensible Markup Language) & XSL (Extensible Stylesheet Language)
 
 ## Dynamic Content
 
-<img src="Note.assets/image-20200623233004254.png" alt="image-20200623233004254" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623233004254.png" alt="image-20200623233004254" style="zoom:50%;" />
 
-<img src="Note.assets/image-20200623233007383.png" alt="image-20200623233007383" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623233007383.png" alt="image-20200623233007383" style="zoom:50%;" />
 
 ![image-20200623233011163](Note.assets/image-20200623233011163.png
 
 ## Client-side Scripting
 
-<img src="Note.assets/image-20200623233037433.png" alt="image-20200623233037433" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623233037433.png" alt="image-20200623233037433" style="zoom:50%;" />
 
 Technologies for producing interactive web applications include:
 
@@ -526,17 +526,17 @@ Technologies for producing interactive web applications include:
 
 ### Conceptual division of DNS Namespace
 
-<img src="Note.assets/image-20200623234129193.png" alt="image-20200623234129193" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623234129193.png" alt="image-20200623234129193" style="zoom:50%;" />
 
 ### Top-level domains
 
-<img src="Note.assets/image-20200623234145520.png" alt="image-20200623234145520" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623234145520.png" alt="image-20200623234145520" style="zoom:50%;" />
 
 ### Resource Records
 
-<img src="Note.assets/image-20200623234208358.png" alt="image-20200623234208358" style="zoom:50%;" />
+<img src="Networking.assets/image-20200623234208358.png" alt="image-20200623234208358" style="zoom:50%;" />
 
-<img src="Note.assets/image-20200623234336910.png" alt="image-20200623234336910" style="zoom: 50%;" />
+<img src="Networking.assets/image-20200623234336910.png" alt="image-20200623234336910" style="zoom: 50%;" />
 
 >Tutorial 3 Question 5
 >
@@ -610,7 +610,7 @@ Technologies for producing interactive web applications include:
   - if answer is not known, then the local DNS queries up the hierarchy to the top level (root) DNS for the domain and then relays the answer to the resolver client.
 - Essentially, this is a recursive query mode. Queries are subject to timers to avoid longer than necessary response times.
 
-<img src="Note.assets/image-20200623235249999.png" alt=" " style="zoom:50%;" />
+<img src="Networking.assets/image-20200623235249999.png" alt=" " style="zoom:50%;" />
 
 ### DNS Security
 
@@ -663,15 +663,15 @@ Technologies for producing interactive web applications include:
 
 ### Format
 
-<img src="Note.assets/image-20200624000208734.png" alt="image-20200624000208734" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624000208734.png" alt="image-20200624000208734" style="zoom:50%;" />
 
 ### Message Header Fields
 
-<img src="Note.assets/image-20200624000224471.png" alt="image-20200624000224471" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624000224471.png" alt="image-20200624000224471" style="zoom:50%;" />
 
 ### SMTP
 
-<img src="Note.assets/image-20200624000409444.png" alt="image-20200624000409444" style="zoom:33%;" />
+<img src="Networking.assets/image-20200624000409444.png" alt="image-20200624000409444" style="zoom:33%;" />
 
 - SMTP uses **TCP** to reliably transfer email message from client to server, port 25
 - three phases of transfer 
@@ -685,7 +685,7 @@ Technologies for producing interactive web applications include:
 
 ### MIME
 
-<img src="Note.assets/image-20200624000505461.png" alt="image-20200624000505461" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624000505461.png" alt="image-20200624000505461" style="zoom:50%;" />
 
 MIME has 5 additional message headers
 
@@ -711,7 +711,7 @@ MIME has 5 additional message headers
 
 - **HTTP**: gmail, Hotmail, Yahoo! Mail, etc.
 
-<img src="Note.assets/image-20200624000844032.png" alt="image-20200624000844032" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624000844032.png" alt="image-20200624000844032" style="zoom:50%;" />
 
 (a) Sending and reading mail when the receiver has a permanent Internet connection and the user agent runs on the same machine as the message transfer agent (now rare).
 
@@ -829,7 +829,7 @@ OSI Layer 5 to provide
 - The Transport layer services provide interfaces between the **Application layer** and the **Network/Internet layer.**
 - **Location**: The Transport layer entities (the hardware or software which actually does the work e.g. OS kernel, processes, NIC) can exist in multiple locations.
 
-<img src="Note.assets/image-20200624013057568.png" alt="image-20200624013057568" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624013057568.png" alt="image-20200624013057568" style="zoom:50%;" />
 
 - **Transport layer provides a “logical” communication channel between processes running on different hosts**
   - Connection-oriented
@@ -842,7 +842,7 @@ OSI Layer 5 to provide
 
 ## Encapsulation
 
-<img src="Note.assets/image-20200624013215039.png" alt="image-20200624013215039" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624013215039.png" alt="image-20200624013215039" style="zoom:50%;" />
 
 - Abstract representation of messages sent to and from transport entities
 
@@ -889,7 +889,7 @@ OSI Layer 5 to provide
 - **Multiplexing(MUXING)**: combining multiple distinct streams into a single shared stream
 - **Demultiplexing**(**DEMUXING**): splitting distinct streams out from a single shared stream
 
-![image-20200624014246763](Note.assets/image-20200624014246763.png<img src="Note.assets/image-20200624014313909.png" alt="image-20200624014313909" style="zoom:50%;" />
+![image-20200624014246763](Note.assets/image-20200624014246763.png<img src="Networking.assets/image-20200624014313909.png" alt="image-20200624014313909" style="zoom:50%;" />
 
 ## UDP – User Datagram Protocol
 
@@ -931,7 +931,7 @@ The User Datagram Protocol provides a protocol whereby applications can transmit
   - **destination port** allows initial routing for incoming segments
   - **source port** allows reply routing for outgoing segments.
 
-<img src="Note.assets/image-20200624014723711.png" alt="image-20200624014723711" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624014723711.png" alt="image-20200624014723711" style="zoom:50%;" />
 
 <img src="Note.assets/image-20200624014730469.png" alt="image-20200624014730469" style="zoom: 50%;" />
 
@@ -993,7 +993,7 @@ The User Datagram Protocol provides a protocol whereby applications can transmit
 2. Process on machine A is suspended, whilst execution of the procedure takes place on Machine B
 3. Machine B responds with result to Machine A, which then continues processing
 
-<img src="Note.assets/image-20200624020007685.png" alt="challenges" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624020007685.png" alt="challenges" style="zoom:50%;" />
 
 ### Challenges
 
@@ -1019,7 +1019,7 @@ The User Datagram Protocol provides a protocol whereby applications can transmit
 
 - RTP multiplexes several streams into a single stream of UDP segments
 
-<img src="Note.assets/image-20200624020820491.png" alt="image-20200624020820491" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624020820491.png" alt="image-20200624020820491" style="zoom:50%;" />
 
 ### Which layer is RTP at?
 
@@ -1029,7 +1029,7 @@ The User Datagram Protocol provides a protocol whereby applications can transmit
 - The application extracts the audio chunk from the RTP packet and uses the
   header fields of the RTP packet to properly decode and play back the audio chunk.
 
-<img src="Note.assets/image-20200624020902473.png" alt="image-20200624020902473" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624020902473.png" alt="image-20200624020902473" style="zoom:50%;" />
 
 (a) The position of real-time protocol in the protocol stack
 
@@ -1043,13 +1043,13 @@ The User Datagram Protocol provides a protocol whereby applications can transmit
 - Sequence Number – counter incremented on each packet
 - Timestamp – Source controlled relative to start of the stream
 
-<img src="Note.assets/image-20200624021749594.png" alt="image-20200624021749594" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624021749594.png" alt="image-20200624021749594" style="zoom:50%;" />
 
 
 
 ### RTP Playback
 
-<img src="Note.assets/image-20200624022117233.png" alt="image-20200624022117233" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624022117233.png" alt="image-20200624022117233" style="zoom:50%;" />
 
 
 
@@ -1082,14 +1082,14 @@ The User Datagram Protocol provides a protocol whereby applications can transmit
     - TCP entity accepts user data streams, and segments them into pieces
     - sends each piece as a separate IP datagram
   - Recipient TCP entities reconstruct the original byte streams from the encapsulation
-- <img src="Note.assets/image-20200624110332545.png" alt="image-20200624110332545" style="zoom:50%;" />
+- <img src="Networking.assets/image-20200624110332545.png" alt="image-20200624110332545" style="zoom:50%;" />
 
 #### Service Model
 
 - The sender and receiver both create sockets
   - A kernel data structure, named by the 5-tuple of IP address an port number of sender and receiver, and the protocol
   - For TCP service to be activated, connections must be explicitly established between a socket at a sending host (src-host, src-port) and a socket at a receiving host (dest-host, dest-port)
-- <img src="Note.assets/image-20200624110326739.png" alt="image-20200624110326739" style="zoom:50%;" />
+- <img src="Networking.assets/image-20200624110326739.png" alt="image-20200624110326739" style="zoom:50%;" />
 
 #### TL;DR
 
@@ -1127,9 +1127,9 @@ TCP provides
 
 
 
-<img src="Note.assets/image-20200626110932352.png" alt="image-20200626110932352" style="zoom:50%;" />
+<img src="Networking.assets/image-20200626110932352.png" alt="image-20200626110932352" style="zoom:50%;" />
 
-<img src="Note.assets/image-20200624103101848.png" alt="image-20200624103101848" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624103101848.png" alt="image-20200624103101848" style="zoom:50%;" />
 
 ### TCP Primitives
 
@@ -1176,7 +1176,7 @@ core functions which allow interface with transport services (in particular TCP)
   - avoids problems that can occur when both sides allocate **same sequence numbers** by accident
   - Sender and receivers exchange information about which sequencing strategy each will use, and agree on it before transmitting segments
 
-<img src="Note.assets/image-20200624095142329.png" alt="image-20200624095142329" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624095142329.png" alt="image-20200624095142329" style="zoom:50%;" />
 
 - (a) Normal operation
   - The first two segments carry no payload, that is, no application-layer data; 
@@ -1240,7 +1240,7 @@ core functions which allow interface with transport services (in particular TCP)
   - `RST` is sent in response to receiving a packet for a closed socket.
   - Can be used to close a connection, but `FIN` is greatly preferred because **it is an orderly shutdown of the connection**, as opposed to a reset
 
-![Network programming in Linux - Transmission Control Protocol (TCP)](Note.assets/Figure_13.gif)
+![Network programming in Linux - Transmission Control Protocol (TCP)](Networking.assets/Figure_13.gif)
 
 #### SYN Flooding
 
@@ -1279,9 +1279,9 @@ core functions which allow interface with transport services (in particular TCP)
   receive window
 - Sender Maintains the following invariant: `LastByteSent - LastByteAcked <= ReceiveWindowAdvertised`
 
-<img src="Note.assets/image-20200625012528149.png" alt="image-20200625012528149" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625012528149.png" alt="image-20200625012528149" style="zoom:50%;" />
 
-<img src="Note.assets/image-20200625013331756.png" alt="image-20200625013331756" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625013331756.png" alt="image-20200625013331756" style="zoom:50%;" />
 
 #### Potential for deadlock
 
@@ -1321,7 +1321,7 @@ core functions which allow interface with transport services (in particular TCP)
 - **As each new segment is acknowledged, the congestion window is increased by one maximum segment size**
   - CWND++
 
-<img src="Note.assets/image-20200625030243438.png" alt="image-20200625030243438" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625030243438.png" alt="image-20200625030243438" style="zoom:50%;" />
 
 - Each full window of acknowledgements doubles the congestion window which grows until
   - a timeout
@@ -1334,7 +1334,7 @@ core functions which allow interface with transport services (in particular TCP)
 - Once`ssthresh` `is reached the growth is slowed to linear, by adding 1 MSS to the congestion window for each successful ACK.
 - Can also react to known lost segments via fast retransmission
 
-<img src="Note.assets/image-20200625031330489.png" alt="image-20200625031330489" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625031330489.png" alt="image-20200625031330489" style="zoom:50%;" />
 
 
 
@@ -1344,14 +1344,14 @@ core functions which allow interface with transport services (in particular TCP)
 - Starts from new ssthresh instead of original starting value
   - effectively avoiding the slow start phase and going straight to additive increase
 
-<img src="Note.assets/image-20200625031457858.png" alt="image-20200625031457858" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625031457858.png" alt="image-20200625031457858" style="zoom:50%;" />
 
 #### Further Optimisations
 
 - SACK (**Selective Acknowledgements**) 
   - provides greater ability to track segments in-flight, by allowing up to 3 ranges of bytes received to be specified
 
-<img src="Note.assets/image-20200625031619492.png" alt="image-20200625031619492" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625031619492.png" alt="image-20200625031619492" style="zoom:50%;" />
 
 - ECN Explicit Congestion Notification (ECE & CWR bits set during SYN)
   - Allows IP Layer to indicate congestion is occurring without dropping the segment by setting an ECN flag
@@ -1367,9 +1367,9 @@ core functions which allow interface with transport services (in particular TCP)
   - Response to long round-trip times (RTTs)
   - Response to random packet loss
 
-<img src="Note.assets/image-20200625032105171.png" alt="image-20200625032105171" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625032105171.png" alt="image-20200625032105171" style="zoom:50%;" />
 
-<img src="Note.assets/image-20200625032052124.png" alt="image-20200625032052124" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625032052124.png" alt="image-20200625032052124" style="zoom:50%;" />
 
 **Why**: TCP is forcing the packet loss rate to be high in order to keep the window size small enough.
 
@@ -1459,7 +1459,7 @@ core functions which allow interface with transport services (in particular TCP)
 > - Suppose the two segments sent by A arrive in order at B. The first acknowledgment is lost and the second acknowledgment arrives after the first timeout interval. Draw a timing diagram, showing these segments and all other segments and acknowledgments sent. (Assume there is no additional packet loss.) For each segment in your figure, provide the sequence number and the number of bytes of data;
 >   for each acknowledgment that you add, provide the acknowledgment number.
 >
-> ![image-20200625023952760](Note.assets/image-20200625023952760.png)
+> ![image-20200625023952760](Networking.assets/image-20200625023952760.png)
 
 >Tutorial Week 5 Question 6
 >
@@ -1494,7 +1494,7 @@ core functions which allow interface with transport services (in particular TCP)
 >- **Congestion Avoidance**: cwnd gets increased by 1 MSS for each transmission round.
 >- **Fast Recovery algorithm**: cwnd gets increased by 1 MSS for each duplicate ACK.
 >
->![image-20200626145459240](Note.assets/image-20200626145459240.png)
+>![image-20200626145459240](Networking.assets/image-20200626145459240.png)
 
 >Tutorial Week 6 Question 5
 >
@@ -1565,15 +1565,15 @@ core functions which allow interface with transport services (in particular TCP)
 
 ### Using Sockets in C
 
-<img src="Note.assets/image-20200624230205165.png" alt="image-20200624230205165" style="zoom: 50%;" />
+<img src="Networking.assets/image-20200624230205165.png" alt="image-20200624230205165" style="zoom: 50%;" />
 
-<img src="Note.assets/image-20200624230216414.png" alt="image-20200624230216414" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624230216414.png" alt="image-20200624230216414" style="zoom:50%;" />
 
-<img src="Note.assets/image-20200624230221945.png" alt="image-20200624230221945" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624230221945.png" alt="image-20200624230221945" style="zoom:50%;" />
 
-<img src="Note.assets/image-20200624230232871.png" alt="image-20200624230232871" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624230232871.png" alt="image-20200624230232871" style="zoom:50%;" />
 
-<img src="Note.assets/image-20200624230252693.png" alt="image-20200624230252693" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624230252693.png" alt="image-20200624230252693" style="zoom:50%;" />
 
 ```C
 // Headers
@@ -1633,9 +1633,9 @@ close(connfd);
 - Clearly a web server needs to be able to handle concurrent connections from multiple clients
 - This can be achieved through the usage of a multi-threaded web server
 
-<img src="Note.assets/image-20200624234647683.png" alt="image-20200624234647683" style="zoom:50%;" />
+<img src="Networking.assets/image-20200624234647683.png" alt="image-20200624234647683" style="zoom:50%;" />
 
-![image-20200625010213278](Note.assets/image-20200625010213278.png)
+![image-20200625010213278](Networking.assets/image-20200625010213278.png)
 
 >Tutorial Week 5 Question 2
 >
@@ -1665,18 +1665,18 @@ close(connfd);
 - BitKeeper – 2000 proprietary
 - Git – developed by Linus Torvalds
 
-<img src="Note.assets/image-20200625013731030.png" alt="image-20200625013731030" style="zoom: 67%;" />
+<img src="Networking.assets/image-20200625013731030.png" alt="image-20200625013731030" style="zoom: 67%;" />
 
 ## Architecture
 
 - Distributed version control
   - Git stores changes remotely by syncing repositories
 
-<img src="Note.assets/image-20200625013824168.png" alt="image-20200625013824168" style="zoom: 67%;" />
+<img src="Networking.assets/image-20200625013824168.png" alt="image-20200625013824168" style="zoom: 67%;" />
 
 - **Data structure**: Directed acyclic graph(DAG)
 
-<img src="Note.assets/image-20200625013827980.png" alt="image-20200625013827980" style="zoom: 50%;" />
+<img src="Networking.assets/image-20200625013827980.png" alt="image-20200625013827980" style="zoom: 50%;" />
 
 
 
@@ -1684,7 +1684,7 @@ close(connfd);
 - **Staging area** – file in .git that records files to be added to next commit
 - `.git` directory – configuration and repository database
 
-<img src="Note.assets/image-20200625014342187.png" alt="image-20200625014342187" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625014342187.png" alt="image-20200625014342187" style="zoom:50%;" />
 
 ## Storage
 
@@ -1760,7 +1760,7 @@ close(connfd);
 
 ## Go-back-N
 
-<img src="Note.assets/image-20200625020409241.png" alt="image-20200625020409241" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625020409241.png" alt="image-20200625020409241" style="zoom:50%;" />
 
 ### Sender
 
@@ -1784,11 +1784,11 @@ close(connfd);
 
 - **Disadvantage**: wasteful, causing Congestion collapse
 
-<img src="Note.assets/image-20200625020930095.png" alt="image-20200625020930095" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625020930095.png" alt="image-20200625020930095" style="zoom:50%;" />
 
 ## Selective Repeat
 
-<img src="Note.assets/image-20200625022044519.png" alt="image-20200625022044519" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625022044519.png" alt="image-20200625022044519" style="zoom:50%;" />
 
 ### Sender
 
@@ -1801,7 +1801,7 @@ close(connfd);
 - receiver sends individual ack for each correctly received packet
 - receiver buffers out-of-order packets
 
-<img src="Note.assets/image-20200625022234903.png" alt="image-20200625022234903" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625022234903.png" alt="image-20200625022234903" style="zoom:50%;" />
 
 **Advantage:** efficient - only retransmit the lost packet
 
@@ -1862,6 +1862,8 @@ close(connfd);
 
 ## Routing
 
+- Routing is the process of nding which output link a packet should be forwarded on (populating the forwarding table).
+
 ###  Routing table
 
 - Routing tables are typically based around a triple
@@ -1886,7 +1888,7 @@ close(connfd);
   - Currently it roughly halves the size of the routing table
   - Prefixes can overlap, in which case **the longest matching prefix is selected**
 
-![image-20200626100604463](Note.assets/image-20200626100604463.png)
+![image-20200626100604463](Networking.assets/image-20200626100604463.png)
 
 ### Routing algorithm
 
@@ -1907,7 +1909,7 @@ close(connfd);
 
 - **Fairness** vs. **Efficiency**
 
-<img src="Note.assets/image-20200626092221770.png" alt="image-20200626092221770" style="zoom:50%;" />
+<img src="Networking.assets/image-20200626092221770.png" alt="image-20200626092221770" style="zoom:50%;" />
 
 - **Delay** vs. **Bandwidth**
   - Minimise the number of hops a packet has to make
@@ -1939,13 +1941,13 @@ close(connfd);
 
 - If router `J` is on the optimal path from router `I` to `K`, then the optimal path from `J` to `K` also falls along the same route.
 
-![image-20200626093138846](Note.assets/image-20200626093138846.png)
+![image-20200626093138846](Networking.assets/image-20200626093138846.png)
 
 #### Sink Tree
 
 - The optimality principle means that a set of optimal routes from all sources form a tree rooted at the destination
 
-![image-20200626093228471](Note.assets/image-20200626093228471.png)
+![image-20200626093228471](Networking.assets/image-20200626093228471.png)
 
 
 
@@ -1980,7 +1982,7 @@ close(connfd);
      - Building the packet is easy, deciding **when to build them is difficult**
        - At intervals?
        - When a change occurs – link disconnect?
-     - <img src="Note.assets/image-20200626094059288.png" alt="image-20200626094059288" style="zoom:50%;" />
+     - <img src="Networking.assets/image-20200626094059288.png" alt="image-20200626094059288" style="zoom:50%;" />
   4. Send the packet to, and receive packets from, all other routers
      - **reliable flooding** is used to send packets to all other routers
        - acknowledgements are used to guarantee every other router receives the packet
@@ -2026,7 +2028,7 @@ close(connfd);
     - **Customer** only advertises routes for their network to avoid transiting other traffic
   - **peering agreements**: we carry each others’ traffic without charge
 
-![image-20200626095513464](Note.assets/image-20200626095513464.png)
+![image-20200626095513464](Networking.assets/image-20200626095513464.png)
 
 - **Attack**: 
   - A malicious AS can advertise routes for networks at extremely low cost, causing traffic to re-routed through that AS
@@ -2035,6 +2037,8 @@ close(connfd);
   - an effective way to divert traffic for monitoring or disruption
 
 ## Packet forwarding
+
+- Forwarding is the process of using the forwarding table to send a packet of of the correct link.
 
 - Each router has a forwarding table (or routing table).
   - This maps destination addresses to outgoing interfaces.
@@ -2058,7 +2062,7 @@ close(connfd);
 - Paths can change for packets in the same transport layer connection
 - **Forwarding tables** (also called routing tables)
 
-![image-20200625101306541](Note.assets/image-20200625101306541.png)
+![image-20200625101306541](Networking.assets/image-20200625101306541.png)
 
 ### Connection-oriented
 
@@ -2067,7 +2071,7 @@ close(connfd);
   - “Out”: next hop and new connection number
 - Connection number is local to a hop
 
-![image-20200625101542460](Note.assets/image-20200625101542460.png)
+![image-20200625101542460](Networking.assets/image-20200625101542460.png)
 
 #### MultiProtocol Label Switching
 
@@ -2146,7 +2150,7 @@ close(connfd);
 
 - Originally IP addresses were allocated based on classes
 - Routing was performed based on the class, which could be derived from the first part of the address
-- <img src="Note.assets/image-20200625112423391.png" alt="image-20200625112423391" style="zoom:50%;" />
+- <img src="Networking.assets/image-20200625112423391.png" alt="image-20200625112423391" style="zoom:50%;" />
 
 ### Classless Inter Domain Routing
 
@@ -2169,7 +2173,7 @@ close(connfd);
 - **Prefix**: A network corresponds to a contiguous block of IP address space, called a prefix
   - Prefixes are written as the lowest IP address followed by a slash and the size of the network portion - 192.0.2.0/24
   - Can also be written as a subnet mask, a binary mask of 1’s
-    - <img src="Note.assets/image-20200625113042048.png" alt="image-20200625113042048" style="zoom: 50%;" />
+    - <img src="Networking.assets/image-20200625113042048.png" alt="image-20200625113042048" style="zoom: 50%;" />
 - **Blocks**
 
 | IP           | Network                                   | Host                                           | Subnet mask   |
@@ -2187,21 +2191,21 @@ close(connfd);
 - Aggregation is performed automatically
 - Currently it roughly halves the size of the routing table
 
-<img src="Note.assets/image-20200625113510142.png" alt="image-20200625113510142" style="zoom:80%;" />
+<img src="Networking.assets/image-20200625113510142.png" alt="image-20200625113510142" style="zoom:80%;" />
 
 - Prefixes can overlap, in which case the **longest matching prefix is selected**
 
-<img src="Note.assets/image-20200625113538154.png" alt="image-20200625113538154" style="zoom: 80%;" />
+<img src="Networking.assets/image-20200625113538154.png" alt="image-20200625113538154" style="zoom: 80%;" />
 
 
 
 ### Special IP Addresses
 
-<img src="Note.assets/image-20200625113610404.png" alt="image-20200625113610404" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625113610404.png" alt="image-20200625113610404" style="zoom:50%;" />
 
 ### IPv6
 
-<img src="Note.assets/image-20200625114141046.png" alt="image-20200625114141046" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625114141046.png" alt="image-20200625114141046" style="zoom:50%;" />
 
 - **Length**: IPv6 addresses are **128** bits
 
@@ -2223,11 +2227,11 @@ close(connfd);
 
 
 
-![image-20200625111622412](Note.assets/image-20200625111622412.png)
+![image-20200625111622412](Networking.assets/image-20200625111622412.png)
 
 ### IP Version 4 Protocol
 
-<img src="Note.assets/image-20200625111613411.png" alt="image-20200625111613411" style="zoom: 67%;" />
+<img src="Networking.assets/image-20200625111613411.png" alt="image-20200625111613411" style="zoom: 67%;" />
 
 | Field                                   | Usage                                                        |
 | --------------------------------------- | ------------------------------------------------------------ |
@@ -2243,7 +2247,7 @@ close(connfd);
 
 ### IP Version 6 Protocol
 
-<img src="Note.assets/image-20200625114326058.png" alt="image-20200625114326058" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625114326058.png" alt="image-20200625114326058" style="zoom:50%;" />
 
 | Field                   | Usage                                                        |
 | ----------------------- | ------------------------------------------------------------ |
@@ -2281,7 +2285,7 @@ close(connfd);
 
 ### Subnet Routing
 
-<img src="Note.assets/image-20200625120140330.png" alt="image-20200625120140330" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625120140330.png" alt="image-20200625120140330" style="zoom:50%;" />
 
 - When a packet arrives from the internet, the router can use the subnet masks (bitwise AND) to find which subnet it should send the packet to, without knowing all hosts on the subnet
   - **Incoming**: `10000000.11010000.00000010.10010111`
@@ -2297,7 +2301,7 @@ close(connfd);
 
 ## Network Address Translation (NAT)
 
-<img src="Note.assets/image-20200625121157561.png" alt="image-20200625121157561" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625121157561.png" alt="image-20200625121157561" style="zoom:50%;" />
 
 - NAT **allows** an IP address to handle many more
   - an ISP with a /16 allocation can only handle 65,534 hosts
@@ -2376,11 +2380,11 @@ close(connfd);
   - Non-transparent Fragmentation
     - reassembly is performed at the destination host
 
-<img src="Note.assets/image-20200625125306632.png" alt="image-20200625125306632" style="zoom:50%;" />
+<img src="Networking.assets/image-20200625125306632.png" alt="image-20200625125306632" style="zoom:50%;" />
 
 ### Fragmentation and IP Headers
 
-<img src="Note.assets/image-20200625111613411.png" alt="image-20200625111613411" style="zoom: 67%;" />
+<img src="Networking.assets/image-20200625111613411-1593233219026.png" alt="image-20200625111613411" style="zoom: 67%;" />
 
 - **Identification**: used to identify a packet
 - **Flags**
@@ -2437,7 +2441,7 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
  - Allows a **one-to-many** communication, ideal for
    	- Streaming live content
       	- Video conferences
-   	-  Sending updates to a group of machines
+      	-  Sending updates to a group of machines
 
 - Class D addresses are **reserved** for multicasting
   - Groups are identified by an IP address (can handle 250 million groups)
@@ -2469,7 +2473,7 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
   - Congestion collapse occurs when the performance plummets
   - Congestion can become self-fulfilling, if packets are delayed they could be resent, leading to yet more traffic
 
-<img src="Note.assets/image-20200626105312271.png" alt="image-20200626105312271" style="zoom:50%;" />
+<img src="Networking.assets/image-20200626105312271.png" alt="image-20200626105312271" style="zoom:50%;" />
 
 ### Congestion Control vs. Flow Control
 
@@ -2492,7 +2496,7 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
 
 ### Congestion Control Solutions
 
-<img src="Note.assets/image-20200626105514915.png" alt="image-20200626105514915" style="zoom:50%;" />
+<img src="Networking.assets/image-20200626105514915.png" alt="image-20200626105514915" style="zoom:50%;" />
 
 - Network Provisioning
   - Ultimate solution, add more capacity, slow and expensive
@@ -2515,7 +2519,7 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
 
 ### Explicit Congestion Control - ECN
 
-![image-20200626110423209](Note.assets/image-20200626110423209.png)
+![image-20200626110423209](Networking.assets/image-20200626110423209.png)
 
 | Field                   | Usage                                                        |
 | ----------------------- | ------------------------------------------------------------ |
@@ -2584,7 +2588,7 @@ If we have a payload of 1700 bytes. MTU=1500 bytes, ID=1:
 
 #### How DHCP works?
 
-![Sequence of DHCP messages across a network](Note.assets/CSF-Images.4.13.png)
+![Sequence of DHCP messages across a network](Networking.assets/CSF-Images.4.13.png)
 
 	- Network has a DHCP server for issuing IP addresses
 
