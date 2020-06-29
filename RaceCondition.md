@@ -6,7 +6,7 @@
   - Debugging programs containing race conditions is no fun at all.
 
 - Example
-  - ![image-20200629153013564](Race condition.assets/image-20200629153013564-1593412086483.png)
+  - ![image-20200629153013564](RaceCondition.assets/image-20200629153013564-1593412086483.png)
   - **Setting**: 
     - When a process wants to print a file, it enters the file name in a special spooler directory. Another process
     - the printer daemon, periodically checks to see if there are any files to be printed, and if there are, it prints them and then removes their names from the directory.
@@ -30,7 +30,7 @@
   - No process running outside its critical region may block any process.
   - No process should have to wait forever to enter its critical region.
 
-![image-20200629154527507](Race condition.assets/image-20200629154527507-1593412088182.png)
+![image-20200629154527507](RaceCondition.assets/image-20200629154527507-1593412088182.png)
 
 ### Disabling Interrupts
 
@@ -70,7 +70,7 @@
 
 ### Strict Alternation
 
-![image-20200629155744723](Race condition.assets/image-20200629155744723.png)
+![image-20200629155744723](RaceCondition.assets/image-20200629155744723.png)
 
 - In Fig. 2-23, the integer variable `turn`, initially 0, keeps track of whose turn it is to enter the critical region and examine or update the shared memory.
 
@@ -97,7 +97,7 @@
   - then it acquires the lock and returns. 
   - After leaving the critical region the process calls leave region, which stores a 0 in lock.
 
-![image-20200629160702944](Race condition.assets/image-20200629160702944.png)
+![image-20200629160702944](RaceCondition.assets/image-20200629160702944.png)
 
 ### Busy Waiting
 
@@ -148,7 +148,7 @@
   - A set of processes is deadlocked if each process in the set is waiting for an event that only another process in the set can cause
   - In other words, each member of the set of deadlocked processes is waiting for a resource that is owned by a deadlocked process.
     - This kind of deadlock is called a resource deadlock.
-- ![image-20200629162016751](Race condition.assets/image-20200629162016751.png)
+- ![image-20200629162016751](RaceCondition.assets/image-20200629162016751.png)
 - **Deadlock Modelling**
   - A directed arc from a process to a resource means that the process is currently
     blocked waiting for that resource.

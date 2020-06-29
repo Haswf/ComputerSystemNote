@@ -2,7 +2,7 @@
 
 ## Trends
 
-![image-20200627144308729](Cloud Computing.assets/image-20200627144308729.png)
+![image-20200627144308729](CloudComputing.assets/image-20200627144308729.png)
 
 ### End-user
 
@@ -19,7 +19,7 @@
 
 ## Service Model
 
-![image-20200627143513778](Cloud Computing.assets/image-20200627143513778.png)
+![image-20200627143513778](CloudComputing.assets/image-20200627143513778.png)
 
 ## Software as a Service (SaaS)
 
