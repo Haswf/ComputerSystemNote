@@ -6,7 +6,7 @@
   - Debugging programs containing race conditions is no fun at all.
 
 - Example
-  - ![image-20200629153013564](C:\Users\Haswell\AppData\Roaming\Typora\typora-user-images\image-20200629153013564.png)
+  - ![image-20200629153013564](Race condition.assets/image-20200629153013564-1593412086483.png)
   - **Setting**: 
     - When a process wants to print a file, it enters the file name in a special spooler directory. Another process
     - the printer daemon, periodically checks to see if there are any files to be printed, and if there are, it prints them and then removes their names from the directory.
@@ -30,7 +30,7 @@
   - No process running outside its critical region may block any process.
   - No process should have to wait forever to enter its critical region.
 
-![image-20200629154527507](C:\Users\Haswell\AppData\Roaming\Typora\typora-user-images\image-20200629154527507.png)
+![image-20200629154527507](Race condition.assets/image-20200629154527507-1593412088182.png)
 
 ### Disabling Interrupts
 
